@@ -51,8 +51,8 @@ jobs:
           severity: 'CRITICAL,HIGH'
 ```
 
-
 ### Scanning a Tarball
+
 ```yaml
 name: build
 on:
@@ -81,7 +81,9 @@ jobs:
 ```
 
 ### Using Trivy with GitHub Code Scanning
+
 If you have [GitHub code scanning](https://docs.github.com/en/github/finding-security-vulnerabilities-and-errors-in-your-code/about-code-scanning) available you can use Trivy as a scanning tool as follows:
+
 ```yaml
 name: build
 on:
@@ -114,9 +116,10 @@ jobs:
           sarif_file: 'trivy-results.sarif'
 ```
 
-You can find a more in-depth example here: https://github.com/aquasecurity/trivy-sarif-demo/blob/master/.github/workflows/scan.yml
+You can find a more in-depth example here: <https://github.com/aquasecurity/trivy-sarif-demo/blob/master/.github/workflows/scan.yml>
 
 If you would like to upload SARIF results to GitHub Code scanning even upon a non zero exit code from Trivy Scan, you can add the following to your upload step:
+
 ```yaml
 name: build
 on:
@@ -150,12 +153,14 @@ jobs:
           sarif_file: 'trivy-results.sarif'
 ```
 
-See this for more details: https://docs.github.com/en/actions/learn-github-actions/expressions#always
+See this for more details: <https://docs.github.com/en/actions/learn-github-actions/expressions#always>
 
 ### Using Trivy to scan your Git repo
+
 It's also possible to scan your git repos with Trivy's built-in repo scan. This can be handy if you want to run Trivy as a build time check on each PR that gets opened in your repo. This helps you identify potential vulnerablites that might get introduced with each PR.
 
 If you have [GitHub code scanning](https://docs.github.com/en/github/finding-security-vulnerabilities-and-errors-in-your-code/about-code-scanning) available you can use Trivy as a scanning tool as follows:
+
 ```yaml
 name: build
 on:
@@ -187,9 +192,11 @@ jobs:
 ```
 
 ### Using Trivy to scan your rootfs directories
+
 It's also possible to scan your rootfs directories with Trivy's built-in rootfs scan. This can be handy if you want to run Trivy as a build time check on each PR that gets opened in your repo. This helps you identify potential vulnerablites that might get introduced with each PR.
 
 If you have [GitHub code scanning](https://docs.github.com/en/github/finding-security-vulnerabilities-and-errors-in-your-code/about-code-scanning) available you can use Trivy as a scanning tool as follows:
+
 ```yaml
 name: build
 on:
@@ -222,9 +229,11 @@ jobs:
 ```
 
 ### Using Trivy to scan Infrastucture as Code
+
 It's also possible to scan your IaC repos with Trivy's built-in repo scan. This can be handy if you want to run Trivy as a build time check on each PR that gets opened in your repo. This helps you identify potential vulnerablites that might get introduced with each PR.
 
 If you have [GitHub code scanning](https://docs.github.com/en/github/finding-security-vulnerabilities-and-errors-in-your-code/about-code-scanning) available you can use Trivy as a scanning tool as follows:
+
 ```yaml
 name: build
 on:
@@ -257,11 +266,13 @@ jobs:
 ```
 
 ### Using Trivy to generate SBOM
+
 It's possible for Trivy to generate an SBOM of your dependencies and submit them to a consumer like GitHub Dependency Snapshot.
 
-The sending of SBOM to GitHub feature is only available if you currently have [GitHub Dependency Snapshot](https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/using-the-dependency-submission-api) available to you in your repo. 
+The sending of SBOM to GitHub feature is only available if you currently have [GitHub Dependency Snapshot](https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/using-the-dependency-submission-api) available to you in your repo.
 
 In order to send results to the GitHub Dependency Snapshot, you will need to create a [GitHub PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+
 ```yaml
 ---
 name: Pull Request
@@ -289,11 +300,14 @@ jobs:
 ```
 
 ### Using Trivy to scan your private registry
+
 It's also possible to scan your private registry with Trivy's built-in image scan. All you have to do is set ENV vars.
 
 #### Docker Hub registry
+
 Docker Hub needs `TRIVY_USERNAME` and `TRIVY_PASSWORD`.
 You don't need to set ENV vars when downloading from a public repository.
+
 ```yaml
 name: build
 on:
@@ -326,10 +340,12 @@ jobs:
 ```
 
 #### AWS ECR (Elastic Container Registry)
+
 Trivy uses AWS SDK. You don't need to install `aws` CLI tool.
 You can use [AWS CLI's ENV Vars][env-var].
 
 [env-var]: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html
+
 ```yaml
 name: build
 on:
@@ -363,9 +379,11 @@ jobs:
 ```
 
 #### GCR (Google Container Registry)
+
 Trivy uses Google Cloud SDK. You don't need to install `gcloud` command.
 
 If you want to use target project's repository, you can set it via `GOOGLE_APPLICATION_CREDENTIAL`.
+
 ```yaml
 name: build
 on:
@@ -397,8 +415,10 @@ jobs:
 ```
 
 #### Self-Hosted
+
 BasicAuth server needs `TRIVY_USERNAME` and `TRIVY_PASSWORD`.
 if you want to use 80 port, use NonSSL `TRIVY_NON_SSL=true`
+
 ```yaml
 name: build
 on:
@@ -459,6 +479,7 @@ Following inputs can be used as `step.with` keys:
 | `security-checks` | String  | `vuln,secret`                      | comma-separated list of what security issues to detect (`vuln`,`secret`,`config`)               |
 | `trivyignores`    | String  |                                    | comma-separated list of relative paths in repository to one or more `.trivyignore` files        |
 | `github-pat`      | String  |                                    | GitHub Personal Access Token (PAT) for sending SBOM scan results to GitHub Dependency Snapshots |
+| `update-database` | Boolean | `false`                            | Update the vulnerability database. Note that this will fail behind Zscaler if true              |
 
 [release]: https://github.com/aquasecurity/trivy-action/releases/latest
 [release-img]: https://img.shields.io/github/release/aquasecurity/trivy-action.svg?logo=github

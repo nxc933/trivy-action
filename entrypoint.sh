@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:" o; do
+while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:" o; do
    case "${o}" in
        a)
          export scanType=${OPTARG}
@@ -64,6 +64,9 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:" o; do
        ;;
        u)
          export githubPAT=${OPTARG}
+       ;;
+       v)
+        export updateDatabase=${OPTARG}
        ;;
   esac
 done
@@ -155,6 +158,9 @@ if [ "$skipFiles" ];then
   do
     ARGS="$ARGS --skip-files $i"
   done
+fi
+if [ "$updateDatabase" == "false" ];then
+  ARGS="$ARGS --skip-update"
 fi
 
 echo "Running trivy with options: ${ARGS}" "${artifactRef}"

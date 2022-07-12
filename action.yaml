@@ -1,113 +1,118 @@
-name: 'Aqua Security Trivy'
-description: 'Scans container images for vulnerabilities with Trivy'
-author: 'Aqua Security'
+name: "Aqua Security Trivy"
+description: "Scans container images for vulnerabilities with Trivy"
+author: "Aqua Security"
 inputs:
   scan-type:
-    description: 'Scan type to use for scanning vulnerability'
+    description: "Scan type to use for scanning vulnerability"
     required: false
-    default: 'image'
+    default: "image"
   image-ref:
-    description: 'image reference(for backward compatibility)'
+    description: "image reference(for backward compatibility)"
     required: true
   input:
-    description: 'reference of tar file to scan'
+    description: "reference of tar file to scan"
     required: false
-    default: ''
+    default: ""
   scan-ref:
-    description: 'Scan reference'
+    description: "Scan reference"
     required: false
-    default: '.'
+    default: "."
   exit-code:
-    description: 'exit code when vulnerabilities were found'
+    description: "exit code when vulnerabilities were found"
     required: false
   ignore-unfixed:
-    description: 'ignore unfixed vulnerabilities'
+    description: "ignore unfixed vulnerabilities"
     required: false
-    default: 'false'
+    default: "false"
   vuln-type:
-    description: 'comma-separated list of vulnerability types (os,library)'
+    description: "comma-separated list of vulnerability types (os,library)"
     required: false
-    default: 'os,library'
+    default: "os,library"
   severity:
-    description: 'severities of vulnerabilities to be displayed'
+    description: "severities of vulnerabilities to be displayed"
     required: false
-    default: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
+    default: "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL"
   format:
-    description: 'output format (table, json, template)'
+    description: "output format (table, json, template)"
     required: false
-    default: 'table'
+    default: "table"
   template:
-    description: 'use an existing template for rendering output (@/contrib/gitlab.tpl, @/contrib/junit.tpl, @/contrib/html.tpl)'
+    description: "use an existing template for rendering output (@/contrib/gitlab.tpl, @/contrib/junit.tpl, @/contrib/html.tpl)"
     required: false
-    default: ''
+    default: ""
   output:
-    description: 'writes results to a file with the specified file name'
+    description: "writes results to a file with the specified file name"
     required: false
-    default: ''
+    default: ""
   skip-dirs:
-    description: 'comma separated list of directories where traversal is skipped'
+    description: "comma separated list of directories where traversal is skipped"
     required: false
-    default: ''
+    default: ""
   skip-files:
-    description: 'comma separated list of files to be skipped'
+    description: "comma separated list of files to be skipped"
     required: false
-    default: ''
+    default: ""
   cache-dir:
-    description: 'specify where the cache is stored'
+    description: "specify where the cache is stored"
     required: false
-    default: ''
+    default: ""
   timeout:
-    description: 'timeout (default 5m0s)'
+    description: "timeout (default 5m0s)"
     required: false
-    default: ''
+    default: ""
   ignore-policy:
-    description: 'filter vulnerabilities with OPA rego language'
+    description: "filter vulnerabilities with OPA rego language"
     required: false
-    default: ''
+    default: ""
   hide-progress:
-    description: 'hide progress output'
+    description: "hide progress output"
     required: false
   list-all-pkgs:
-    description: 'output all packages regardless of vulnerability'
+    description: "output all packages regardless of vulnerability"
     required: false
-    default: 'false'
+    default: "false"
   security-checks:
-    description: 'comma-separated list of what security issues to detect'
+    description: "comma-separated list of what security issues to detect"
     required: false
-    default: ''
+    default: ""
   trivyignores:
-    description: 'comma-separated list of relative paths in repository to one or more .trivyignore files'
+    description: "comma-separated list of relative paths in repository to one or more .trivyignore files"
     required: false
-    default: ''
+    default: ""
   artifact-type:
-    description: 'input artifact type (image, fs, repo, archive) for SBOM generation'
+    description: "input artifact type (image, fs, repo, archive) for SBOM generation"
     required: false
   github-pat:
-    description: 'GitHub Personal Access Token (PAT) for submitting SBOM to GitHub Dependency Snapshot API'
+    description: "GitHub Personal Access Token (PAT) for submitting SBOM to GitHub Dependency Snapshot API"
     required: false
+  update-database:
+    description: "Update vulnerability database"
+    required: false
+    default: "false"
 
 runs:
-  using: 'docker'
+  using: "docker"
   image: "Dockerfile"
   args:
-    - '-a ${{ inputs.scan-type }}'
-    - '-b ${{ inputs.format }}'
-    - '-c ${{ inputs.template }}'
-    - '-d ${{ inputs.exit-code }}'
-    - '-e ${{ inputs.ignore-unfixed }}'
-    - '-f ${{ inputs.vuln-type }}'
-    - '-g ${{ inputs.severity }}'
-    - '-h ${{ inputs.output }}'
-    - '-i ${{ inputs.image-ref }}'
-    - '-j ${{ inputs.scan-ref }}'
-    - '-k ${{ inputs.skip-dirs }}'
-    - '-l ${{ inputs.input }}'
-    - '-m ${{ inputs.cache-dir }}'
-    - '-n ${{ inputs.timeout }}'
-    - '-o ${{ inputs.ignore-policy }}'
-    - '-p ${{ inputs.hide-progress }}'
-    - '-q ${{ inputs.skip-files }}'
-    - '-r ${{ inputs.list-all-pkgs }}'
-    - '-s ${{ inputs.security-checks }}'
-    - '-t ${{ inputs.trivyignores }}'
-    - '-u ${{ inputs.github-pat }}'
+    - "-a ${{ inputs.scan-type }}"
+    - "-b ${{ inputs.format }}"
+    - "-c ${{ inputs.template }}"
+    - "-d ${{ inputs.exit-code }}"
+    - "-e ${{ inputs.ignore-unfixed }}"
+    - "-f ${{ inputs.vuln-type }}"
+    - "-g ${{ inputs.severity }}"
+    - "-h ${{ inputs.output }}"
+    - "-i ${{ inputs.image-ref }}"
+    - "-j ${{ inputs.scan-ref }}"
+    - "-k ${{ inputs.skip-dirs }}"
+    - "-l ${{ inputs.input }}"
+    - "-m ${{ inputs.cache-dir }}"
+    - "-n ${{ inputs.timeout }}"
+    - "-o ${{ inputs.ignore-policy }}"
+    - "-p ${{ inputs.hide-progress }}"
+    - "-q ${{ inputs.skip-files }}"
+    - "-r ${{ inputs.list-all-pkgs }}"
+    - "-s ${{ inputs.security-checks }}"
+    - "-t ${{ inputs.trivyignores }}"
+    - "-u ${{ inputs.github-pat }}"
+    - "-v ${{ inputs.update-database }}"
