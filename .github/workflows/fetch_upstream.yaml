@@ -8,7 +8,7 @@ on:
 
 jobs:
   sync_with_upstream:
-    runs-on: sw-ubuntu-k8s
+    runs-on: ubuntu-20.04
     name: Sync HEAD with upstream latest
 
     steps:
