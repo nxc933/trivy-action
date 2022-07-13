@@ -24,6 +24,6 @@ jobs:
         uses: bdougie/Fork-Sync-With-Upstream-action@fork
         with:
           upstream_repository: aquasecurity/trivy-action
-          upstream_branch: main
-          target_branch: main # optional
+          upstream_branch: master
+          target_branch: master # optional
           github_token: ${{ secrets.GITHUB_TOKEN }}
