@@ -65,9 +65,6 @@ while getopts "a:b:c:d:e:f:g:h:i:j:k:l:m:n:o:p:q:r:s:t:u:v:" o; do
        u)
          export githubPAT=${OPTARG}
        ;;
-       v)
-        export updateDatabase=${OPTARG}
-       ;;
   esac
 done
 
@@ -159,10 +156,6 @@ if [ "$skipFiles" ];then
     ARGS="$ARGS --skip-files $i"
   done
 fi
-# echo "$updateDatabase"
-# if [ "$updateDatabase" != "true" ];then
-#   ARGS="$ARGS --skip-update"
-# fi
 
 echo "Running trivy with options: ${ARGS}" "${artifactRef}"
 echo "Global options: " "${GLOBAL_ARGS}"
