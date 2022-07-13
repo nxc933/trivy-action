@@ -159,10 +159,10 @@ if [ "$skipFiles" ];then
     ARGS="$ARGS --skip-files $i"
   done
 fi
-echo "$updateDatabase"
-if [ "$updateDatabase" != "true" ];then
-  ARGS="$ARGS --skip-update"
-fi
+# echo "$updateDatabase"
+# if [ "$updateDatabase" != "true" ];then
+#   ARGS="$ARGS --skip-update"
+# fi
 
 echo "Running trivy with options: ${ARGS}" "${artifactRef}"
 echo "Global options: " "${GLOBAL_ARGS}"
