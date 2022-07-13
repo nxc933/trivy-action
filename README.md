@@ -479,7 +479,6 @@ Following inputs can be used as `step.with` keys:
 | `security-checks` | String  | `vuln,secret`                      | comma-separated list of what security issues to detect (`vuln`,`secret`,`config`)               |
 | `trivyignores`    | String  |                                    | comma-separated list of relative paths in repository to one or more `.trivyignore` files        |
 | `github-pat`      | String  |                                    | GitHub Personal Access Token (PAT) for sending SBOM scan results to GitHub Dependency Snapshots |
-| `update-database` | Boolean | `false`                            | Update the vulnerability database. Note that this will fail behind Zscaler if true              |
 
 [release]: https://github.com/aquasecurity/trivy-action/releases/latest
 [release-img]: https://img.shields.io/github/release/aquasecurity/trivy-action.svg?logo=github
