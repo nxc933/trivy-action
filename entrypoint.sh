@@ -159,7 +159,8 @@ if [ "$skipFiles" ];then
     ARGS="$ARGS --skip-files $i"
   done
 fi
-if [ "$updateDatabase" == "false" ];then
+echo "$updateDatabase"
+if [ "$updateDatabase" != "true" ];then
   ARGS="$ARGS --skip-update"
 fi
 
