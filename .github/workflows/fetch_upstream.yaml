@@ -18,11 +18,12 @@ jobs:
           ref: master
 
       # Step 2: run this sync action - specify the upstream repo, upstream branch to sync with, and target sync branch
-      - name: Pull upstream changes
+      - name: Sync upstream changes
         id: sync
-        uses: bdougie/Fork-Sync-With-Upstream-action@fork
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.2
         with:
-          upstream_repository: aquasecurity/trivy-action
-          upstream_branch: master
-          target_branch: master # optional
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          target_sync_branch: master
+          # REQUIRED 'target_repo_token' exactly like this!
+          target_repo_token: ${{ secrets.GITHUB_TOKEN }}
+          upstream_sync_branch: master
+          upstream_sync_repo: aquasecurity/trivy-action
